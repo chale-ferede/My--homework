@@ -12,8 +12,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-  TextView textView;
-    String inputValue	 = "";
+    TextView textView;
+    String inputNum = "";
     String operator = "";
     int num1 = 0;
     boolean isNewOp = true;
@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textView=findViewById(R.id.textView);
-        textView.setText("0");
+        textView = findViewById(R.id.textView);
+        textView.setText("CASIO");
 
     }
 
@@ -33,114 +33,114 @@ public class MainActivity extends AppCompatActivity {
         String number = button.getText().toString();
 
         if (isNewOp) {
-            inputValue	 = number;
+            inputNum = number;
             isNewOp = false;
         } else {
-            inputValue	+= number;
+            inputNum += number;
         }
 
-        textView.setText(inputValue	);
+        textView.setText(inputNum);
 
     }
 
     public void funcOperatorClick(View view) {
-        num1=Integer.parseInt(inputValue);
+        num1 = Integer.parseInt(inputNum);
         Button button = (Button) view;
         operator = button.getText().toString();
-        textView.setText(inputValue	 + " " + operator);
-        inputValue	 = "";
+        textView.setText(inputNum + " " + operator);
+        inputNum = "";
     }
 
     public void funcEqualClick(View view) {
 
-      int num2 = Integer.parseInt(inputValue);
-      int result = 0;
+        //int num2 = Integer.parseInt(inputNum);
+        double num2=Double.parseDouble(inputNum);
+        double res = 0;
 
         switch (operator) {
             case "+":
-                result = num1 + num2;
+                res = num1 + num2;
                 break;
             case "-":
-                result = num1 - num2;
+                res = num1 - num2;
                 break;
             case "*":
-                result = num1 * num2; break;
+                res = num1 * num2;
+                break;
 
             case "/":
-                if(num2 !=0) {
-                    result = num1 / num2;
-                }
-                else {
-              textView.setText("Error");
-              return;
+                if (num2 != 0) {
+                    res = num1 / num2;
+                } else {
+                    textView.setText("Error");
+                    return;
                 }
                 break;
         }
-
-       textView .setText(String.valueOf(result));
-    }
-   public  void funcSquareRootClick(View view){
-       num1 = Integer.parseInt(inputValue);
-       if (num1 < 0) return;
-
-       double result = Math.sqrt(num1);
-
-       if (result == (int) result) {
-           textView.setText(String.valueOf((int) result));
-           inputValue	 = String.valueOf((int) result);
-       } else {
-           textView.setText(String.valueOf(result));
-           inputValue	 = String.valueOf(result);
-       }
-
-
-   }
-
-    public void funcOnClick(View view) {
-        textView.setVisibility(View.VISIBLE);
-        textView.setText("0");
-        inputValue	 = "";
-        num1 = 0;
-        operator="";
-
+        inputNum=(res==(int) res)?String.valueOf((int) res) : String.valueOf(res);
+        textView.setText(inputNum);
     }
 
-
-    public void funcOffClick(View view) {
-        textView.setVisibility(View.INVISIBLE);
-        inputValue	 = "";
-        num1 = 0;
-        operator = "";
-
-    }
+    public void funcSquareClick(View view) {
+        if (inputNum.isEmpty() || inputNum==null) {
+            textView.setText("0");
+            return;
+        }
+        try {
 
 
-    public void funcDeleteClick(View view) {
+            double num = Double.parseDouble(inputNum);
 
-        inputValue	 = inputValue	.substring(0, inputValue	.length() - 1);
-        textView.setText(inputValue	.isEmpty() ? "0" : inputValue	);
-
-
-    }
-
-    public void funcDotClick(View view) {
-        if (!inputValue	.contains(".")) {
-            inputValue	 += ".";
-            textView.setText(inputValue	);
+            if (num < 0) {
+                textView.setText("Error");
+                return;
+            }
+            double res = Math.sqrt(num);
+            if(res==(int) res) {
+                inputNum = String.valueOf((int)res);
+            }
+            else {
+                inputNum=String.valueOf(res);
+            }
+            textView.setText(String.valueOf(inputNum));
+        } catch (NumberFormatException e) {
+            textView.setText("Error");
         }
     }
 
+            public void funcOnClick (View view){
+                textView.setVisibility(View.VISIBLE);
+                textView.setText("CASIO");
+                inputNum = "";
+                num1 = 0;
+                operator = "";
+
+            }
 
 
+            public void funcOffClick (View view){
+                textView.setVisibility(View.INVISIBLE);
+                inputNum = "";
+                num1 = 0;
+                operator = "";
 
-    public void funcClearClick(View view) {
+            }
 
-        textView.setText("0");
-        inputValue	 = "";
-        num1 = 0;
-        operator = "";
 
-    }
+            public void funcDeleteClick (View view){
+
+                inputNum = inputNum.substring(0, inputNum.length() - 1);
+                textView.setText(inputNum.isEmpty() ? "0" : inputNum);
+
+
+            }
+
+            public void funcExponentClick (View view){
+                if (!inputNum.contains(".")) {
+                    inputNum += ".";
+                    textView.setText(inputNum);
+                }
+            }
 
 
 

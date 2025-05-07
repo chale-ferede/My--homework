@@ -22,7 +22,7 @@
             android:layout_weight="1"
             android:background="#262231"
             android:gravity="center"
-            android:text="0"
+            android:text="Calculator"
             android:textColor="#D1C9C9"
             android:textSize="34sp" />
 
@@ -204,7 +204,7 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/button_design"
-            android:onClick="funcDotClick"
+            android:onClick="fucExponentClick"
             android:text="." />
 
         <Button
@@ -245,7 +245,7 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/button_design"
-            android:onClick="funcSquareRootClick"
+            android:onClick="funcSquareClick"
             android:text="√" />
 
         <Button
@@ -256,7 +256,7 @@
             android:layout_weight="1"
             android:background="@drawable/button_design"
             android:onClick="funcDeleteClick"
-            android:text="c" />
+            android:text="Del" />
 
 
         <Button
@@ -277,7 +277,7 @@
             android:layout_weight="1"
             android:background="@drawable/button_design"
             android:onClick="funcOffClick"
-            android:text="AC" />
+            android:text="Off" />
     </LinearLayout>
 </LinearLayout>
 
